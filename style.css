@@ -1,0 +1,390 @@
+/* Algemene instellingen & Kleuren */
+:root {
+    --primary-color: #f39c12; /* Minecraft Goud/Oranje accent */
+    --primary-hover: #d35400;
+    --bg-dark: #121212;
+    --bg-card: #1e1e1e;
+    --text-main: #ffffff;
+    --text-muted: #a0a0a0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+/* Navigatiebalk */
+.navbar {
+    background-color: rgba(18, 18, 18, 0.95);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 2px solid #2a2a2a;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.nav-links a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+.discord-btn {
+    background-color: #5865F2;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+}
+
+.discord-btn:hover {
+    background-color: #4752C4 !important;
+    color: white !important;
+}
+
+/* Hero Sectie */
+.hero {
+    height: 80vh;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(18,18,18,1)), 
+                url('https://images.unsplash.com/photo-1627856013091-fed6e4e30025?q=80&w=1600') center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 1rem;
+    margin-top: 60px;
+}
+
+.server-title {
+    font-size: 3rem;
+    letter-spacing: 2px;
+}
+
+.highlight {
+    color: var(--primary-color);
+}
+
+.server-subtitle {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+/* IP Box & Status */
+.ip-box {
+    background-color: var(--bg-card);
+    border: 2px dashed var(--primary-color);
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    display: inline-block;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.ip-box:hover {
+    transform: scale(1.03);
+    background-color: #252525;
+}
+
+.ip-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: block;
+}
+
+.copy-btn {
+    font-size: 0.8rem;
+    color: var(--primary-color);
+    margin-top: 5px;
+    display: block;
+}
+
+.status-box {
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+}
+
+.status-indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #2ecc71;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+/* Secties & Cards */
+.section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.section-desc {
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 2.5rem;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.card {
+    background-color: var(--bg-card);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #2a2a2a;
+    position: relative;
+}
+
+.card-tag {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: var(--primary-color);
+    color: black;
+    font-weight: bold;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 3px;
+}
+
+.card-tag.event { background-color: #e74c3c; color: white; }
+
+.card-date {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0.5rem 0 1rem 0;
+}
+
+/* STAFF SECTIE STIJLEN (NIEUW) */
+.staff-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.staff-card {
+    background-color: var(--bg-card);
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.staff-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+}
+
+.staff-head {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    /* Pixelated look voor Minecraft koppen */
+    image-rendering: pixelated; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.staff-name {
+    font-size: 1.2rem;
+    margin-bottom: 0.3rem;
+}
+
+.staff-role {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Rollen Kleuren */
+.role-owner { background-color: #e74c3c; color: white; }
+.role-admin { background-color: #e67e22; color: white; }
+.role-dev { background-color: #9b59b6; color: white; }
+.role-mod { background-color: #2ecc71; color: white; }
+.role-helper { background-color: #3498db; color: white; }
+
+/* Rank Cards */
+.rank-card {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.rank-card.featured {
+    border: 2px solid var(--primary-color);
+    transform: scale(1.03);
+}
+
+.badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--primary-color);
+    color: black;
+    font-weight: bold;
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+}
+
+.price {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 1rem 0;
+    color: var(--primary-color);
+}
+
+.rank-card ul {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 1.5rem;
+}
+
+.rank-card li {
+    margin-bottom: 0.5rem;
+    color: var(--text-muted);
+}
+
+.rank-card li i {
+    color: #2ecc71;
+    margin-right: 8px;
+}
+
+.buy-btn {
+    display: block;
+    background-color: var(--primary-color);
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.8rem;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+
+.buy-btn:hover {
+    background-color: var(--primary-hover);
+    color: white;
+}
+
+/* Regels */
+.rules-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.rule-item {
+    background-color: var(--bg-card);
+    padding: 1.5rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.rule-item i {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+/* Footer */
+footer {
+    background-color: #0a0a0a;
+    border-top: 1px solid #2a2a2a;
+    padding: 2rem;
+    text-align: center;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+.socials {
+    display: flex;
+    gap: 1rem;
+}
+
+.socials a {
+    color: var(--text-muted);
+    font-size: 1.5rem;
+    transition: color 0.2s;
+}
+
+.socials a:hover {
+    color: var(--primary-color);
+}
+
+/* Responsive design voor mobiel */
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .server-title {
+        font-size: 2rem;
+    }
+    .rank-card.featured {
+        transform: none;
+    }
+}
