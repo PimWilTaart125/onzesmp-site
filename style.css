@@ -1,10 +1,10 @@
 :root {
-    --primary-color: #f39c12; 
-    --primary-hover: #d35400;
-    --bg-dark: #121212;
-    --bg-card: #1e1e1e;
-    --text-main: #ffffff;
-    --text-muted: #a0a0a0;
+    --primary-color: #7c3aed; /* Diep paars */
+    --primary-hover: #6d28d9; /* Donkerder paars voor hover */
+    --bg-dark: #0f172a;        /* Zeer donker nachtblauw */
+    --bg-card: #1e293b;        /* Donkerblauw voor kaarten */
+    --text-main: #f8fafc;      /* Helder wit/lichtgrijs */
+    --text-muted: #94a3b8;     /* Zacht blauwgrijs */
 }
 
 * {
