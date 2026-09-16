@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mijn Minecraft Server</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome voor icoontjes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Navigatiebalk -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-cube"></i> MINESERVER
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="#news"><i class="fa-solid fa-newspaper"></i> Nieuws</a></li>
+                <li><a href="#staff"><i class="fa-solid fa-users"></i> Staff</a></li>
+                <li><a href="#store"><i class="fa-solid fa-cart-shopping"></i> Winkel</a></li>
+                <li><a href="#rules"><i class="fa-solid fa-book"></i> Regels</a></li>
+                <li><a href="https://discord.gg/voorbeeld" target="_blank" class="discord-btn"><i class="fa-brands fa-discord"></i> Discord</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero / Header Sectie -->
+    <header id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="server-title">WELKOM OP <span class="highlight">MINESERVER</span></h1>
+            <p class="server-subtitle">De leukste survival & minigames community van Nederland!</p>
+            
+            <!-- IP Kopieer Box -->
+            <div class="ip-box" id="ipBox" onclick="copyIP()">
+                <span class="ip-text" id="serverIP">play.mijnserver.nl</span>
+                <span class="copy-btn"><i class="fa-regular fa-copy"></i> KLIK OM TE KOPIËREN</span>
+            </div>
+
+            <!-- Server Status Widget -->
+            <div class="status-box">
+                <span class="status-indicator"></span>
+                <span id="playerCount">Laden...</span> spelers online
+            </div>
+        </div>
+    </header>
+
+    <!-- Nieuws & Updates -->
+    <section id="news" class="section">
+        <h2 class="section-title">LAATSTE NIEUWS</h2>
+        <div class="cards-grid">
+            <article class="card">
+                <div class="card-tag">UPDATE</div>
+                <h3>Seizoen 2 Survival Update!</h3>
+                <p class="card-date"><i class="fa-regular fa-calendar"></i> 10 September 2026</p>
+                <p>We zijn trots om Seizoen 2 aan te kondigen! Nieuwe wereld, custom items en betere performances.</p>
+            </article>
+
+            <article class="card">
+                <div class="card-tag event">EVENT</div>
+                <h3>Building Contest Weekend</h3>
+                <p class="card-date"><i class="fa-regular fa-calendar"></i> 5 September 2026</p>
+                <p>Doe mee met onze maandelijkse bouwcompetitie en maak kans op een gratis VIP rank!</p>
+            </article>
+
+            <article class="card">
+                <div class="card-tag">SHOP</div>
+                <h3>30% Zomer Korting</h3>
+                <p class="card-date"><i class="fa-regular fa-calendar"></i> 1 September 2026</p>
+                <p>Gebruik de code <strong>ZOMER30</strong> in onze webshop voor 30% korting op alle ranks.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- Staff Sectie (NIEUW) -->
+    <section id="staff" class="section staff-section">
+        <h2 class="section-title">ONS STAFFTEAM</h2>
+        <p class="section-desc">Maak kennis met het team dat de server onderhoudt en helpt!</p>
+
+        <div class="staff-grid">
+            <!-- Eigenaar -->
+            <div class="staff-card owner">
+                <img src="https://mc-heads.net/avatar/Notch/100" alt="Notch" class="staff-head">
+                <h3 class="staff-name">Notch</h3>
+                <span class="staff-role role-owner">Eigenaar</span>
+            </div>
+
+            <!-- Admin -->
+            <div class="staff-card admin">
+                <img src="https://mc-heads.net/avatar/Jeb_/100" alt="Jeb_" class="staff-head">
+                <h3 class="staff-name">Jeb_</h3>
+                <span class="staff-role role-admin">Admin</span>
+            </div>
+
+            <!-- Developer -->
+            <div class="staff-card dev">
+                <img src="https://mc-heads.net/avatar/Dinnerbone/100" alt="Dinnerbone" class="staff-head">
+                <h3 class="staff-name">Dinnerbone</h3>
+                <span class="staff-role role-dev">Developer</span>
+            </div>
+
+            <!-- Moderator 1 -->
+            <div class="staff-card mod">
+                <img src="https://mc-heads.net/avatar/Grumm/100" alt="Grumm" class="staff-head">
+                <h3 class="staff-name">Grumm</h3>
+                <span class="staff-role role-mod">Moderator</span>
+            </div>
+
+            <!-- Moderator 2 -->
+            <div class="staff-card mod">
+                <img src="https://mc-heads.net/avatar/Alex/100" alt="Alex" class="staff-head">
+                <h3 class="staff-name">Alex</h3>
+                <span class="staff-role role-mod">Moderator</span>
+            </div>
+
+            <!-- Helper -->
+            <div class="staff-card helper">
+                <img src="https://mc-heads.net/avatar/Steve/100" alt="Steve" class="staff-head">
+                <h3 class="staff-name">Steve</h3>
+                <span class="staff-role role-helper">Helper</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Winkel / Ranks Preview -->
+    <section id="store" class="section store-section">
+        <h2 class="section-title">SUPPORT DE SERVER</h2>
+        <p class="section-desc">Bekijk onze populairste ranks in de webshop.</p>
+        
+        <div class="cards-grid">
+            <div class="card rank-card">
+                <h3>VIP</h3>
+                <div class="price">€4.99</div>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> VIP Tag in chat</li>
+                    <li><i class="fa-solid fa-check"></i> Toegang tot /fly in lobby</li>
+                    <li><i class="fa-solid fa-check"></i> 2 Extra Sethomes</li>
+                </ul>
+                <a href="#" class="buy-btn">Bekijk in Shop</a>
+            </div>
+
+            <div class="card rank-card featured">
+                <div class="badge">POPULAIR</div>
+                <h3>MVP</h3>
+                <div class="price">€9.99</div>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> Alles van VIP</li>
+                    <li><i class="fa-solid fa-check"></i> Custom cosmetics & pets</li>
+                    <li><i class="fa-solid fa-check"></i> Priority join wanneer server vol is</li>
+                </ul>
+                <a href="#" class="buy-btn">Bekijk in Shop</a>
+            </div>
+
+            <div class="card rank-card">
+                <h3>LEGEND</h3>
+                <div class="price">€19.99</div>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> Alles van MVP</li>
+                    <li><i class="fa-solid fa-check"></i> Unieke Legend particles</li>
+                    <li><i class="fa-solid fa-check"></i> 10 Extra Sethomes</li>
+                </ul>
+                <a href="#" class="buy-btn">Bekijk in Shop</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Regels / FAQ -->
+    <section id="rules" class="section">
+        <h2 class="section-title">SERVER REGELS</h2>
+        <div class="rules-container">
+            <div class="rule-item">
+                <i class="fa-solid fa-shield-halved"></i>
+                <div>
+                    <h4>1. Geen Hacking / Cheating</h4>
+                    <p>Het gebruik van modded clients, auto-clickers of X-Ray is streng verboden.</p>
+                </div>
+            </div>
+            <div class="rule-item">
+                <i class="fa-solid fa-comments"></i>
+                <div>
+                    <h4>2. Wees Respectvol</h4>
+                    <p>Schelden, haatzaaien en spammen in de chat wordt niet getolereerd.</p>
+                </div>
+            </div>
+            <div class="rule-item">
+                <i class="fa-solid fa-burst"></i>
+                <div>
+                    <h4>3. Geen Griefen</h4>
+                    <p>Het slopen van bouwwerken van andere spelers is verboden, ook buiten claims.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2026 MijnServer Minecraft. Niet geaffilieerd met Mojang Studios of Microsoft.</p>
+            <div class="socials">
+                <a href="#"><i class="fa-brands fa-discord"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+          </html>
