@@ -1,6 +1,5 @@
-/* Algemene instellingen & Kleuren */
 :root {
-    --primary-color: #f39c12; /* Minecraft Goud/Oranje accent */
+    --primary-color: #f39c12; 
     --primary-hover: #d35400;
     --bg-dark: #121212;
     --bg-card: #1e1e1e;
@@ -22,7 +21,7 @@ body {
     line-height: 1.6;
 }
 
-/* Navigatiebalk */
+
 .navbar {
     background-color: rgba(18, 18, 18, 0.95);
     position: fixed;
@@ -77,7 +76,7 @@ body {
     color: white !important;
 }
 
-/* Hero Sectie */
+
 .hero {
     height: 80vh;
     background: linear-gradient(rgba(0,0,0,0.7), rgba(18,18,18,1)), 
@@ -105,7 +104,6 @@ body {
     margin-bottom: 2rem;
 }
 
-/* IP Box & Status */
 .ip-box {
     background-color: var(--bg-card);
     border: 2px dashed var(--primary-color);
@@ -149,7 +147,6 @@ body {
     margin-right: 5px;
 }
 
-/* Secties & Cards */
 .section {
     max-width: 1200px;
     margin: 0 auto;
@@ -204,7 +201,6 @@ body {
     margin: 0.5rem 0 1rem 0;
 }
 
-/* STAFF SECTIE STIJLEN (NIEUW) */
 .staff-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -250,14 +246,13 @@ body {
     text-transform: uppercase;
 }
 
-/* Rollen Kleuren */
+
 .role-owner { background-color: #e74c3c; color: white; }
 .role-admin { background-color: #e67e22; color: white; }
 .role-dev { background-color: #9b59b6; color: white; }
 .role-mod { background-color: #2ecc71; color: white; }
 .role-helper { background-color: #3498db; color: white; }
 
-/* Rank Cards */
 .rank-card {
     text-align: center;
     display: flex;
@@ -322,7 +317,6 @@ body {
     color: white;
 }
 
-/* Regels */
 .rules-container {
     display: flex;
     flex-direction: column;
@@ -343,7 +337,6 @@ body {
     color: var(--primary-color);
 }
 
-/* Footer */
 footer {
     background-color: #0a0a0a;
     border-top: 1px solid #2a2a2a;
@@ -375,7 +368,7 @@ footer {
     color: var(--primary-color);
 }
 
-/* Responsive design voor mobiel */
+
 @media (max-width: 768px) {
     .nav-container {
         flex-direction: column;
