@@ -26,7 +26,7 @@ async function fetchPlayerCount() {
         const data = await response.json();
 
         if (data.online) {
-            playerCountElement.textContent = data.online;
+            playerCountElement.textContent = data.players.online;
             
             if (data.players.online === 1) {
                 onlineOrNah.textContent = "Speler online.";
