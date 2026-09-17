@@ -19,22 +19,30 @@ function copyIP() {
 
 async function fetchPlayerCount() {
     const playerCountElement = document.getElementById("playerCount");
+    const onlineOrNah = document.getElementById("onlineOrNah");
     
     try {
         const response = await fetch(`https://api.mcsrvstat.us/2/${SERVER_IP}`);
         const data = await response.json();
 
         if (data.online) {
-            playerCountElement.textContent = data.players.online;
+            playerCountElement.textContent = data.online;
+            
+            if (data.players.online === 1) {
+                onlineOrNah.textContent = "Speler online.";
+            } else {
+                onlineOrNah.textContent = "Spelers online.";
+            }
         } else {
-            playerCountElement.textContent = "0";
+            playerCountElement.textContent = "0,";
+            onlineOrNah.textContent = "Server offline.";
         }
     } catch (error) {
         console.error("Fout bij ophalen serverstatus:", error);
-        playerCountElement.textContent = "Offline";
+        playerCountElement.textContent = "Fout,";
+        onlineOrNah.textContent = "status onbekend.";
     }
 }
 
 fetchPlayerCount();
-
 setInterval(fetchPlayerCount, 60000);
