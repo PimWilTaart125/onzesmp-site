@@ -138,15 +138,21 @@ body {
     color: var(--text-muted);
 }
 
-.status-indicator {
+.status-online {
     display: inline-block;
     width: 10px;
     height: 10px;
     background-color: #2ecc71;
     border-radius: 50%;
     margin-right: 5px;
+}.status-offline {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #e74c3c;
+    border-radius: 50%;
+    margin-right: 5px;
 }
-
 .section {
     max-width: 1200px;
     margin: 0 auto;
