@@ -78,7 +78,7 @@ async function fetchPlayerCount() {
 
 function initialiseServerStatus() {
     fetchPlayerCount();
-    setInterval(fetchPlayerCount, 1000);
+    setInterval(fetchPlayerCount, 5000);
 }
 
 if (document.readyState === "loading") {
