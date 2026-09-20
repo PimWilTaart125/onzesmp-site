@@ -1,19 +1,31 @@
-
-const SERVER_IP = "play.onzesmp.nl"; 
+const SERVER_IP = "play.onzesmp.nl";
 
 function copyIP() {
-    navigator.clipboard.writeText(SERVER_IP).then(() => {
-        const ipBox = document.getElementById("ipBox");
+    const ipBox = document.getElementById("ipBox");
+
+    if (!ipBox) {
+        console.error("Element #ipBox does not exist.");
+        return;
+    }
+
+    const copy = navigator.clipboard?.writeText
+        ? navigator.clipboard.writeText(SERVER_IP)
+        : Promise.reject(new Error("Clipboard API is unavailable."));
+
+    copy.then(() => {
         const originalContent = ipBox.innerHTML;
 
         ipBox.innerHTML = `
-            <span class="ip-text" style="color: #2ecc71;">GEKOPIEERD!</span>
+            <span class="ip-text copied">GEKOPIEERD!</span>
             <span class="copy-btn">Veel plezier in-game!</span>
         `;
 
         setTimeout(() => {
             ipBox.innerHTML = originalContent;
         }, 2000);
+    }).catch((error) => {
+        console.error("Kopiëren mislukt:", error);
+        alert(`Kopiëren mislukt. Kopieer het IP handmatig: ${SERVER_IP}`);
     });
 }
 
@@ -22,32 +34,55 @@ async function fetchPlayerCount() {
     const onlineOrNah = document.getElementById("onlineOrNah");
     const indicator = document.querySelector(".status-indicator");
 
-    try {
-        const response = await fetch(`https://api.mcsrvstat.us/2/${SERVER_IP}`);
-        const data = await response.json();
+    if (!playerCountElement || !onlineOrNah || !indicator) {
+        console.error("Een of meerdere serverstatus-elementen ontbreken.");
+        return;
+    }
 
-        if (data.online) {
-            playerCountElement.textContent = data.players.online;
+    try {
+        const response = await fetch(
+            `https://api.mcsrvstat.us/2/${SERVER_IP}`,
+            { headers: { Accept: "application/json" } }
+        );
+
+        if (!response.ok) {
+            throw new Error(`API-fout: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const isOnline = data.online === true;
+
+        if (isOnline) {
+            const onlinePlayers = Number(data.players?.online ?? 0);
+
+            playerCountElement.textContent = onlinePlayers;
+            onlineOrNah.textContent = onlinePlayers === 1
+                ? "Speler online."
+                : "Spelers online.";
             indicator.classList.remove("status-offline");
             indicator.classList.add("status-online");
-            
-            if (data.players.online === 1) {
-                onlineOrNah.textContent = "Speler online.";
-            } else {
-                onlineOrNah.textContent = "Spelers online.";
-            }
         } else {
-            playerCountElement.textContent = "";
+            playerCountElement.textContent = "0";
             onlineOrNah.textContent = "Server offline.";
             indicator.classList.remove("status-online");
             indicator.classList.add("status-offline");
         }
     } catch (error) {
         console.error("Fout bij ophalen serverstatus:", error);
-        playerCountElement.textContent = "Fout";
-        onlineOrNah.textContent = "status onbekend.";
+        playerCountElement.textContent = "—";
+        onlineOrNah.textContent = "Status onbekend.";
+        indicator.classList.remove("status-online");
+        indicator.classList.add("status-offline");
     }
 }
 
-fetchPlayerCount();
-setInterval(fetchPlayerCount, 60000);
+function initialiseServerStatus() {
+    fetchPlayerCount();
+    setInterval(fetchPlayerCount, 60000);
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initialiseServerStatus);
+} else {
+    initialiseServerStatus();
+}
