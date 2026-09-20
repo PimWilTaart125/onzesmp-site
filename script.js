@@ -41,7 +41,7 @@ async function fetchPlayerCount() {
 
     try {
         const response = await fetch(
-            `https://api.mcsrvstat.us/2/${SERVER_IP}`,
+            `https://api.mcstatus.io/v2/status/java/${SERVER_IP}`,
             { headers: { Accept: "application/json" } }
         );
 
