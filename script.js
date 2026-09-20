@@ -37,7 +37,7 @@ async function fetchPlayerCount() {
                 onlineOrNah.textContent = "Spelers online.";
             }
         } else {
-            playerCountElement.textContent = "0";
+            playerCountElement.textContent = "";
             onlineOrNah.textContent = "Server offline.";
             indicator.classList.remove("status-online");
             indicator.classList.add("status-offline");
