@@ -1,34 +1,42 @@
 const SERVER_IP = "play.onzesmp.nl";
-const serverSlug = "onzesmp";
+const serverName = "OnzeSMP";
 
 async function getVotes() {
     const voteElement = document.getElementById("ms-vote");
 
-    if (!voteElement) {
-        return;
-    }
+    if (!voteElement) return;
 
     try {
-        const response = await fetch(
-            `https://mineservers.nl/widget.php?slug=${serverSlug}&size=normal&theme=dark`,
-            { cache: "no-store" }
-        );
+        for (let page = 1; page <= 22; page++) {
+            const response = await fetch(
+                `https://mineservers.nl/api.php?page=${page}`,
+                { cache: "no-store" }
+            );
 
-        if (!response.ok) {
-            throw new Error(`Vote API-fout: ${response.status}`);
+            if (!response.ok) {
+                throw new Error(`Vote API-fout: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            const server = data.servers.find(s =>
+                s.name?.toLowerCase().includes(serverName.toLowerCase())
+            );
+
+            if (server) {
+                voteElement.textContent = server.total_votes;
+                return;
+            }
         }
 
-        const html = await response.text();
-        const monthVotes = html.match(/status-votes[\s\S]*?stat-value[^>]*>\s*(\d+)/)?.[1];
-
-        if (monthVotes) {
-            voteElement.textContent = monthVotes;
-        }
+        voteElement.textContent = "—";
     } catch (error) {
         console.error("Fout bij ophalen stemmen:", error);
         voteElement.textContent = "—";
     }
 }
+
+getVotes();
 
 function copyIP() {
     const ipBox = document.getElementById("ipBox");
