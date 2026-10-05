@@ -1,44 +1,10 @@
 const SERVER_IP = "play.onzesmp.nl";
-const serverSlug = "onzesmp";
 
-async function getVotes() {
-    const voteElement = document.getElementById("ms-vote");
+const data = await fetch(
+    "https://api-vote-ten.vercel.app/api?server=onzesmp"
+).then(r => r.json());
 
-    if (!voteElement) {
-        console.error("Element #ms-vote bestaat niet.");
-        return;
-    }
-
-    try {
-        const response = await fetch(
-            "https://mineservers.nl/api.php?page=2",
-            { cache: "no-store" }
-        );
-
-        if (!response.ok) {
-            throw new Error(`Vote API-fout: ${response.status}`);
-        }
-
-        const data = await response.json();
-
-        const server = data.servers.find(
-            s => s.slug === serverSlug
-        );
-
-        if (!server) {
-            throw new Error(`Server "${serverSlug}" niet gevonden.`);
-        }
-
-        console.log("OnzeSMP:", server);
-
-        voteElement.textContent = server.total_votes;
-
-    } catch (error) {
-        console.error("Fout bij ophalen stemmen:", error);
-        voteElement.textContent = "—";
-    }
-}
-
+document.getElementById("ms-vote").textContent = data.total_votes;
 function copyIP() {
     const ipBox = document.getElementById("ipBox");
 
@@ -122,10 +88,7 @@ async function fetchPlayerCount() {
 
 function initialiseServerStatus() {
     fetchPlayerCount();
-    getVotes();
-
     setInterval(fetchPlayerCount, 5000);
-    setInterval(getVotes, 30000);
 }
 
 if (document.readyState === "loading") {
