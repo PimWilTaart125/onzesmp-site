@@ -1,18 +1,33 @@
 const SERVER_IP = "play.onzesmp.nl";
 const serverSlug = "onzesmp";
 
-function getVotes() {
-const voteElement = document.getElementById("ms-vote");
-const response = await fetch(
-  `https://mineservers.nl/widget.php?slug=${serverSlug}&size=normal&theme=dark`
-);
+async function getVotes() {
+    const voteElement = document.getElementById("ms-vote");
 
-const html = await response.text();
+    if (!voteElement) {
+        return;
+    }
 
-const monthVotes = parseInt(
-  html.match(/status-votes[\s\S]*?stat-value[^>]*>\s*(\d+)/)?.[1]
-);
-voteElement.textContent = monthVotes;
+    try {
+        const response = await fetch(
+            `https://mineservers.nl/widget.php?slug=${serverSlug}&size=normal&theme=dark`,
+            { cache: "no-store" }
+        );
+
+        if (!response.ok) {
+            throw new Error(`Vote API-fout: ${response.status}`);
+        }
+
+        const html = await response.text();
+        const monthVotes = html.match(/status-votes[\s\S]*?stat-value[^>]*>\s*(\d+)/)?.[1];
+
+        if (monthVotes) {
+            voteElement.textContent = monthVotes;
+        }
+    } catch (error) {
+        console.error("Fout bij ophalen stemmen:", error);
+        voteElement.textContent = "—";
+    }
 }
 
 function copyIP() {
@@ -93,7 +108,9 @@ async function fetchPlayerCount() {
 
 function initialiseServerStatus() {
     fetchPlayerCount();
+    getVotes();
     setInterval(fetchPlayerCount, 5000);
+    setInterval(getVotes, 30000);
 }
 
 if (document.readyState === "loading") {
