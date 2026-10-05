@@ -1,35 +1,23 @@
 const SERVER_IP = "play.onzesmp.nl";
-const serverName = "OnzeSMP";
+const serverSlug = "onzesmp";
 
 async function getVotes() {
     const voteElement = document.getElementById("ms-vote");
-
     if (!voteElement) return;
 
     try {
-        for (let page = 1; page <= 22; page++) {
-            const response = await fetch(
-                `https://mineservers.nl/api.php?page=${page}`,
-                { cache: "no-store" }
-            );
+        const response = await fetch(
+            "https://mineservers.nl/api.php?page=2",
+            { cache: "no-store" }
+        );
 
-            if (!response.ok) {
-                throw new Error(`Vote API-fout: ${response.status}`);
-            }
+        if (!response.ok) throw new Error(`API-fout: ${response.status}`);
 
-            const data = await response.json();
+        const data = await response.json();
 
-            const server = data.servers.find(s =>
-                s.name?.toLowerCase().includes(serverName.toLowerCase())
-            );
+        const server = data.servers.find(s => s.slug === serverSlug);
 
-            if (server) {
-                voteElement.textContent = server.total_votes;
-                return;
-            }
-        }
-
-        voteElement.textContent = "—";
+        voteElement.textContent = server?.total_votes ?? "—";
     } catch (error) {
         console.error("Fout bij ophalen stemmen:", error);
         voteElement.textContent = "—";
