@@ -11,15 +11,20 @@ async function getVotes() {
             { cache: "no-store" }
         );
 
-        if (!response.ok) throw new Error(`API-fout: ${response.status}`);
-
         const data = await response.json();
 
-        const server = data.servers.find(s => s.slug === serverSlug);
+        console.log("API:", data);
 
-        voteElement.textContent = server?.total_votes ?? "—";
+        const server = data.servers.find(
+            server => server.slug === serverSlug
+        );
+
+        console.log("Server:", server);
+
+        voteElement.textContent = server ? server.total_votes : "—";
+
     } catch (error) {
-        console.error("Fout bij ophalen stemmen:", error);
+        console.error("Fout:", error);
         voteElement.textContent = "—";
     }
 }
