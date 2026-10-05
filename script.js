@@ -3,7 +3,11 @@ const serverSlug = "onzesmp";
 
 async function getVotes() {
     const voteElement = document.getElementById("ms-vote");
-    if (!voteElement) return;
+
+    if (!voteElement) {
+        console.error("Element #ms-vote bestaat niet.");
+        return;
+    }
 
     try {
         const response = await fetch(
@@ -11,25 +15,29 @@ async function getVotes() {
             { cache: "no-store" }
         );
 
+        if (!response.ok) {
+            throw new Error(`Vote API-fout: ${response.status}`);
+        }
+
         const data = await response.json();
 
-        console.log("API:", data);
-
         const server = data.servers.find(
-            server => server.slug === serverSlug
+            s => s.slug === serverSlug
         );
 
-        console.log("Server:", server);
+        if (!server) {
+            throw new Error(`Server "${serverSlug}" niet gevonden.`);
+        }
 
-        voteElement.textContent = server ? server.total_votes : "—";
+        console.log("OnzeSMP:", server);
+
+        voteElement.textContent = server.total_votes;
 
     } catch (error) {
-        console.error("Fout:", error);
+        console.error("Fout bij ophalen stemmen:", error);
         voteElement.textContent = "—";
     }
 }
-
-getVotes();
 
 function copyIP() {
     const ipBox = document.getElementById("ipBox");
@@ -90,18 +98,23 @@ async function fetchPlayerCount() {
             onlineOrNah.textContent = onlinePlayers === 1
                 ? "Speler online."
                 : "Spelers online.";
+
             indicator.classList.remove("status-offline");
             indicator.classList.add("status-online");
         } else {
             playerCountElement.textContent = "";
             onlineOrNah.textContent = "Server offline.";
+
             indicator.classList.remove("status-online");
             indicator.classList.add("status-offline");
         }
+
     } catch (error) {
         console.error("Fout bij ophalen serverstatus:", error);
+
         playerCountElement.textContent = "—";
         onlineOrNah.textContent = "Status onbekend.";
+
         indicator.classList.remove("status-online");
         indicator.classList.add("status-offline");
     }
@@ -110,6 +123,7 @@ async function fetchPlayerCount() {
 function initialiseServerStatus() {
     fetchPlayerCount();
     getVotes();
+
     setInterval(fetchPlayerCount, 5000);
     setInterval(getVotes, 30000);
 }
