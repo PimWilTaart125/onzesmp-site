@@ -1,10 +1,36 @@
 const SERVER_IP = "play.onzesmp.nl";
 
-const data = await fetch(
-    "https://api-vote-ten.vercel.app/api?server=onzesmp"
-).then(r => r.json());
+async function fetchVotes() {
+    const voteElement = document.getElementById("ms-vote");
 
-document.getElementById("ms-vote").textContent = data.total_votes;
+    if (!voteElement) {
+        console.error("Element #ms-vote does not exist.");
+        return;
+    }
+
+    try {
+        const response = await fetch(
+            "https://api-vote-ten.vercel.app/api?server=onzesmp",
+            { cache: "no-store" }
+        );
+
+        if (!response.ok) {
+            throw new Error(`Vote API-fout: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (typeof data.total_votes !== "number") {
+            throw new Error("Geen geldige total_votes ontvangen.");
+        }
+
+        voteElement.textContent = data.total_votes;
+    } catch (error) {
+        console.error("Fout bij ophalen stemmen:", error);
+        voteElement.textContent = "—";
+    }
+}
+
 function copyIP() {
     const ipBox = document.getElementById("ipBox");
 
@@ -47,7 +73,11 @@ async function fetchPlayerCount() {
     try {
         const response = await fetch(
             `https://api.mcstatus.io/v2/status/java/${SERVER_IP}`,
-            { headers: { Accept: "application/json" } }
+            {
+                headers: {
+                    Accept: "application/json"
+                }
+            }
         );
 
         if (!response.ok) {
@@ -61,6 +91,7 @@ async function fetchPlayerCount() {
             const onlinePlayers = Number(data.players?.online ?? 0);
 
             playerCountElement.textContent = onlinePlayers;
+
             onlineOrNah.textContent = onlinePlayers === 1
                 ? "Speler online."
                 : "Spelers online.";
@@ -88,7 +119,10 @@ async function fetchPlayerCount() {
 
 function initialiseServerStatus() {
     fetchPlayerCount();
+    fetchVotes();
+
     setInterval(fetchPlayerCount, 5000);
+    setInterval(fetchVotes, 30000);
 }
 
 if (document.readyState === "loading") {
