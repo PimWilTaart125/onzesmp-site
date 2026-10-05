@@ -1,7 +1,7 @@
 const SERVER_IP = "play.onzesmp.nl";
 const serverSlug = "onzesmp";
 
-function getVotes {
+function getVotes() {
 const response = await fetch(
   `https://mineservers.nl/widget.php?slug=${serverSlug}&size=normal&theme=dark`
 );
