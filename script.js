@@ -2,6 +2,7 @@ const SERVER_IP = "play.onzesmp.nl";
 const serverSlug = "onzesmp";
 
 function getVotes() {
+const voteElement = document.getElementById("ms-vote");
 const response = await fetch(
   `https://mineservers.nl/widget.php?slug=${serverSlug}&size=normal&theme=dark`
 );
@@ -11,6 +12,7 @@ const html = await response.text();
 const monthVotes = parseInt(
   html.match(/status-votes[\s\S]*?stat-value[^>]*>\s*(\d+)/)?.[1]
 );
+voteElement.textContent = monthVotes;
 }
 
 function copyIP() {
